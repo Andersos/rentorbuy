@@ -1,0 +1,9 @@
+{
+    "extends": "andersos",
+    "env": {
+        "es6": true
+    },
+    "rules": {
+      "require-yield": 0
+    }
+}

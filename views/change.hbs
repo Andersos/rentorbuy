@@ -1,0 +1,38 @@
+<!-- RECOVER -->
+<form id="recover" class="pure-form pure-form-stacked" role="form">
+  <fieldset>
+    <h2>Change password</h2>
+
+    <label for="email">E-mail</label>
+    <input id="email" type="email" placeholder="E-mail">
+
+    <label for="oldpassword">Old password</label>
+    <input id="oldpassword" type="password" placeholder="Old password">
+
+    <label for="newpassword">New password</label>
+    <input id="newpassword" type="password" placeholder="New password">
+
+    <button type="submit" class="pure-button pure-button-primary">Change password</button>
+  </fieldset>
+</form>
+<script>
+document.getElementById("recover").addEventListener("submit", function (e) {
+  e.preventDefault();
+  var user = {
+    email: document.getElementById("email").value.trim(),
+    oldPassword: document.getElementById("oldpassword").value.trim(),
+    newPassword: document.getElementById("newpassword").value.trim()
+  };
+  ref.changePassword(user, function(error) {
+    if (error) {
+      showMessage(err);
+    } else {
+      var change = {
+        message: "We have changed your password"
+      }
+      showMessage(change, "success");
+    }
+  });
+});
+</script>
+<!-- / RECOVER -->

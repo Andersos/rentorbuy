@@ -1,0 +1,26 @@
+<!-- LOGIN -->
+<form id="login" class="pure-form pure-form-stacked" role="form">
+  <fieldset>
+    <h2>Log in</h2>
+
+    <label for="email">E-mail</label>
+    <input id="email" type="email" placeholder="E-mail">
+
+    <label for="password">Passord</label>
+    <input id="password" type="password" placeholder="Password">
+
+    <button type="submit" class="pure-button pure-button-primary">Log in</button>
+  </fieldset>
+</form>
+<p><a href="/recover" style="color: #9daccb; text-decoration: none;">Forgot password?</a></p>
+<script>
+document.getElementById("login").addEventListener("submit", function (e) {
+  e.preventDefault();
+  var user = {
+    email: document.getElementById("email").value.trim(),
+    password: document.getElementById("password").value.trim()
+  };
+  handleAuthResponse(authWithPassword(user));
+});
+</script>
+<!-- / LOGIN -->

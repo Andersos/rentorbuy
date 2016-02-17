@@ -1,0 +1,29 @@
+<!-- RECOVER -->
+<form id="recover" class="pure-form pure-form-stacked" role="form">
+  <fieldset>
+    <h2>Forgot your password?</h2>
+
+    <label for="email">E-mail</label>
+    <input id="email" type="email" placeholder="E-mail">
+
+    <button type="submit" class="pure-button pure-button-primary">Send e-mail</button>
+  </fieldset>
+</form>
+<script>
+document.getElementById("recover").addEventListener("submit", function (e) {
+  e.preventDefault();
+  ref.resetPassword({
+    email: document.getElementById("email").value.trim()
+  }, function(error) {
+    if (error) {
+      showMessage(err);
+    } else {
+      var recover = {
+        message: "We sent and email to " + document.getElementById("email").value.trim() + "!"
+      }
+      showMessage(recover, "success");
+    }
+  });
+});
+</script>
+<!-- / RECOVER -->

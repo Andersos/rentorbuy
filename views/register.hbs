@@ -1,0 +1,59 @@
+<!-- REGISTER -->
+<form id="register" class="pure-form pure-form-stacked" role="form">
+  <fieldset>
+    <h2>Register a new user</h2>
+
+    <label for="name">Name</label>
+    <input id="name" type="text" placeholder="Navn">
+
+    <label for="email">E-mail</label>
+    <input id="email" type="email" placeholder="E-mail">
+
+    <label for="password">Password</label>
+    <input id="password" type="password" placeholder="Password">
+
+    <button type="submit" class="pure-button pure-button-primary">Make a user</button>
+  </fieldset>
+</form>
+
+<form id="user" class="pure-form pure-form-stacked" role="form">
+  <fieldset>
+    <h2>Profile</h2>
+
+    <label for="username">Name</label>
+    <input id="username" type="text" placeholder="Name">
+
+    <button type="submit" class="pure-button pure-button-primary">Update profile</button>
+  </fieldset>
+</form>
+<script>
+// Edit user
+document.getElementById("user").addEventListener("submit", function (e) {
+  e.preventDefault();
+  var ref = new Firebase("https://rentorbuy.firebaseio.com");
+  var authData = ref.getAuth();
+  var usersRef = ref.child("users/" + authData.uid)
+  usersRef.update({
+    "name": document.getElementById("username").value,
+    "email": authData.password.email
+  }, function(error) {
+    if (error) {
+      alert("Data could not be saved." + error);
+    } else {
+      alert("Data saved successfully.");
+    }
+  });
+});
+
+// Registration
+document.getElementById("register").addEventListener("submit", function (e) {
+  e.preventDefault();
+  var user = {
+    name:  document.getElementById("name").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    password: document.getElementById("password").value.trim()
+  };
+  handleAuthResponse(createUserAndLogin(user));
+});
+</script>
+<!-- / REGISTER -->

@@ -1,0 +1,36 @@
+{
+  "name": "rentorbuy",
+  "version": "0.0.1",
+  "description": "rentorbuy",
+  "main": "index.js",
+  "license": "UNLICENSED",
+  "scripts": {
+    "test": "npm run lint && mocha test/test.js",
+    "lint": "eslint .",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "rules": "firebase-bolt < rules.bolt > rules.json"
+  },
+  "author": {
+    "name": "Anders Olsen Sandvik",
+    "email": "npm@andersos.net"
+  },
+  "repository": "Andersos/rentorbuy",
+  "bugs": {
+    "url": "https://github.com/Andersos/rentorbuy/issues"
+  },
+  "devDependencies": {
+    "eslint": "^2.1.0",
+    "eslint-config-andersos": "^0.2.0",
+    "firebase-bolt": "^0.8.0",
+    "mocha": "^2.4.5",
+    "nodemon": "^1.8.1",
+    "supertest": "^1.1.0"
+  },
+  "dependencies": {
+    "firebase-token-generator": "^2.0.0",
+    "koa": "^1.1.2",
+    "koa-hbs": "^0.7.0",
+    "koa-router": "^5.3.0"
+  }
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rent or buy</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+  <script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
+  <style>
+  header {
+    background-color: #0078e7;
+  }
+  header a {
+    padding: 1rem;
+    color: #fff;
+    text-decoration: none;
+  }
+  .pure-menu-heading {
+    padding: 1rem;
+    color: #fff;
+  }
+  main {
+    margin: 1rem;
+  }
+  label {
+    padding-top: .5rem;
+  }
+  .alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+  .alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+  }
+  .alert-danger .alert-link {
+    color: #843534;
+  }
+  .alert .alert-link {
+    font-weight: 700;
+  }
+  .alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+  }
+  </style>
+</head>
+<body>
+  <header class="pure-menu pure-menu-horizontal">
+    <a href="/" class="pure-menu-heading">Rent or buy</a>
+    <a id="loginbutton" href="/login">Log in</a>
+    <a id="logoutbutton">Log out</a>
+  </header>
+  <main>
+    <div id="message" class="hidden" role="alert"></div>
+    <div id="profile" class=""></div>
+    {{{body}}}
+  </main>
+  <footer></footer>
+  <script>
+  var register = document.getElementById("register");
+  var loginbutton = document.getElementById("loginbutton");
+  var logoutbutton = document.getElementById("logoutbutton");
+  var profile = document.getElementById("profile");
+  var user = document.getElementById("user");
+
+  function loggedIn(profileData) {
+    if(register) { hide(register); show(user); }
+    hide(loginbutton);
+    show(logoutbutton);
+    show(profile);
+  }
+
+  function loggedOut() {
+    if(register) { show(register); hide(user); }
+    show(loginbutton);
+    hide(logoutbutton);
+    hide(profile);
+  }
+  function show(el) {
+    el.classList.remove("hidden");
+  }
+
+  function hide(el) {
+    el.classList.add("hidden");
+  }
+
+  var ref = new Firebase("https://rentorbuy.firebaseio.com");
+
+  ref.onAuth(function(authData) {
+    if (authData) {
+      console.log("Authenticated successfully with payload:", authData);
+      loggedIn();
+      profile.innerHTML = "Hello, " + authData.password.email + "!";
+    } else {
+      console.log("Not authenticated");
+      loggedOut();
+    }
+  });
+
+  document.getElementById("logoutbutton").addEventListener("click", function () {
+    ref.unauth();
+  });
+
+  function createUser(userObj) {
+    return new Promise(function(resolve, reject) {
+      ref.createUser(userObj, function (err) {
+        if (!err) {
+          resolve();
+        } else {
+          reject(err);
+        }
+      });
+    });
+  }
+
+  function authWithPassword(userObj) {
+    return new Promise(function(resolve, reject) {
+      ref.authWithPassword(userObj, function onAuth(err, user) {
+        if (err) {
+          reject(err);
+        }
+        if (user) {
+          resolve(user);
+        }
+      });
+    });
+  }
+
+  function createUserAndLogin(userObj) {
+    return createUser(userObj)
+    .then(function () {
+      return authWithPassword(userObj);
+    });
+  }
+
+  function handleAuthResponse(promise) {
+    console.log(promise);
+    promise
+    .then(function (authData) {
+      console.log("it works");
+      document.location.href = "/";
+    }, function (err) {
+      showMessage(err);
+    });
+  }
+
+
+  function showMessage(err, type) {
+    var message = document.getElementById("message");
+    message.classList.remove("hidden");
+    setMessageType(message, type);
+    // https://www.firebase.com/docs/web/guide/user-auth.html#section-full-error
+    switch(err.code) {
+      case "EMAIL_TAKEN": message.innerHTML = "E-mail already exsists. Try to <a href=\"/login\" class=\"alert-link\">log in</a>.";
+      break;
+      case "INVALID_EMAIL": message.innerHTML = "Invalid email.";
+      break;
+      case "INVALID_PASSWORD": message.innerHTML = "Invalid password. <a href=\"/recover\" class=\"alert-link\">Did you forget it?</a>";
+      break;
+      case "INVALID_USER": message.innerHTML = "User does not exsist. Try to <a href=\"/\" class=\"alert-link\">register a new user</a>.";
+      break;
+      default: message.innerHTML = err.message;
+    }
+  }
+
+  function setMessageType(message, type) {
+    if(type === "success") {
+      message.classList.add("alert","alert-success");
+    } else {
+      message.classList.add("alert","alert-danger");
+    }
+  }
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'ANALYTICS CODE HERE', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

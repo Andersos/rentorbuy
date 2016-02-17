@@ -1,0 +1,15 @@
+type User {
+  name: String,
+  email:  String,
+}
+
+path /users/{uid} is User {
+  read() { isCurrentUser(uid) }
+  write() { isCurrentUser(uid) }
+}
+
+path /users {
+  read() { true }
+}
+
+isCurrentUser(uid) { auth != null && auth.uid == uid }
