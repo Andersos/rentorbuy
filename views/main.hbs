@@ -161,8 +161,8 @@
               </div>
             </div>
           </div>
-          <div id="no" class="no buttonfancy">X</div>
-            <div id="yes" class="yes buttonfancy">✔</div>
+          Wrong<div id="no" class="no buttonfancy"> X</div>
+            Right price<div id="yes" class="yes buttonfancy"> ✔</div>
             </div>
           </div>
         </div>
@@ -268,7 +268,7 @@ function loggedIn(profileData) {
   hide(loginbutton);
   show(logoutbutton);
   show(loading);
-  show(profile);
+  if(profile){show(profile);}
   setTimeout(function(){
     if(houses.length > 0) {
       paintHouse(houses.pop());
@@ -289,7 +289,7 @@ function loggedOut() {
   show(loginbutton);
   hide(logoutbutton);
   hide(loading);
-  hide(profile);
+  if(profile){hide(profile);}
   hide(cards);
 }
 function show(el) {
