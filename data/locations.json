@@ -4,3 +4,97 @@
 1.20061.20511, Grünerløkka - Sofienberg
 1.20061.20510, Sagene - Torshov
 1.20061.20509, St.Hanshaugen - Ullevål
+
+
+
+
+  house.child("5").set({
+  "url": "http://m.finn.no/realestate/homes/ad.html?finnkode=71371886",
+  "img": "https://finncdn.no/dynamic/640w/2016/2/vertical-2/17/6/713/718/86_73608041.jpg",
+  "price":1290000
+});
+house.child("6").set({
+"url": "http://m.finn.no/realestate/homes/ad.html?finnkode=71368909",
+"img": "https://finncdn.no/dynamic/640w/2016/2/vertical-2/17/9/713/689/09_340040166.jpg",
+"price":1650000
+});
+house.child("7").set({
+"url": "http://m.finn.no/realestate/homes/ad.html?finnkode=71368909",
+"img": "https://finncdn.no/dynamic/640w/2016/2/vertical-2/17/6/713/628/16_296234435.jpg",
+"price":5300000
+});
+house.child("8").set({
+"url": "http://m.finn.no/realestate/homes/ad.html?finnkode=71368909",
+"img": "https://finncdn.no/dynamic/640w/2016/2/vertical-2/17/2/712/318/92_1608516627.jpg",
+"price":4190000
+});
+
+house.child("9").set({
+"url": "http://m.finn.no/realestate/homes/ad.html?finnkode=71368909",
+"img": "https://finncdn.no/dynamic/640w/2016/2/vertical-2/17/8/713/635/48_1693371720.jpg",
+"price":990000
+});
+house.child("10").set({
+"url": "http://m.finn.no/realestate/homes/ad.html?finnkode=71368909",
+"img": "https://finncdn.no/dynamic/640w/2016/2/vertical-2/17/5/713/640/55_731909604.jpg",
+"price":2190000
+});
+
+house.child("11").set({
+"url": "http://m.finn.no/realestate/homes/ad.html?finnkode=71368909",
+"img": "https://finncdn.no/dynamic/640w/2016/2/vertical-2/17/2/713/629/82_977788988.jpg",
+"price":2200000
+});
+
+house.child("12").set({
+"url": "http://m.finn.no/realestate/homes/ad.html?finnkode=71368909",
+"img": "https://finncdn.no/dynamic/640w/2016/2/vertical-2/17/2/713/653/82_1089299998.jpg",
+"price":2060000
+});
+
+house.child("13").set({
+"url": "http://m.finn.no/realestate/homes/ad.html?finnkode=71368909",
+"img": "https://finncdn.no/dynamic/640w/2016/2/vertical-2/17/6/713/548/96_908437338.jpg",
+"price":2490000
+});
+
+house.child("14").set({
+"url": "http://m.finn.no/realestate/homes/ad.html?finnkode=71368909",
+"img": "https://finncdn.no/dynamic/640w/2016/2/vertical-2/17/3/713/554/53_370089860.jpg",
+"price":1550000
+});
+
+house.child("15").set({
+"url": "http://m.finn.no/realestate/homes/ad.html?finnkode=71368909",
+"img": "https://finncdn.no/dynamic/640w/2016/2/vertical-2/17/2/713/668/72_1890218689.jpg",
+"price":1100000
+});
+
+house.child("16").set({
+"url": "http://m.finn.no/realestate/homes/ad.html?finnkode=71368909",
+"img": "https://finncdn.no/dynamic/640w/2016/2/vertical-2/17/4/713/675/14_991242086.jpg",
+"price":1000000
+});
+
+house.child("17").set({
+"url": "http://m.finn.no/realestate/homes/ad.html?finnkode=71368909",
+"img": "https://finncdn.no/dynamic/640w/2016/2/vertical-2/17/4/713/678/94_1375093034.jpg",
+"price":1900000
+});
+
+house.child("18").set({
+"url": "http://m.finn.no/realestate/homes/ad.html?finnkode=71368909",
+"img": "https://finncdn.no/dynamic/640w/2016/2/vertical-2/17/0/713/682/00_2141474219.jpg",
+"price":2790000
+});
+
+house.child("19").set({
+"url": "http://m.finn.no/realestate/homes/ad.html?finnkode=71368909",
+"img": "https://finncdn.no/dynamic/640w/2016/2/vertical-2/17/8/713/687/78_196415155.jpg",
+"price":2575000
+});
+house.child("20").set({
+"url": "http://m.finn.no/realestate/homes/ad.html?finnkode=71368909",
+"img": "https://finncdn.no/dynamic/640w/2016/2/vertical-2/17/8/713/688/28_1249141720.jpg",
+"price":1300000
+});

@@ -108,7 +108,7 @@
     width: 30px;
     height: 30px;
     line-height: 30px;
-    margin: 0 .5em;
+    margin: 1em .5em;
     display: inline-block;
   }
 
@@ -135,6 +135,7 @@
   <header class="pure-menu pure-menu-horizontal">
     <a href="/" class="pure-menu-heading">Rent or buy</a>
     <a href="/highscore" class="pure-menu-heading">Highscore</a>
+    <a href="/profile" class="pure-menu-heading">Profile</a>
     <a id="loginbutton" href="/login">Log in</a>
     <a id="logoutbutton">Log out</a>
   </header>
@@ -156,7 +157,7 @@
               <img id="card-img" width="320">
               <div>
                 <i>📍</i><span>Oslo</span>
-                <i>💵</i><span>25 000 000</span>
+                <i>💵</i><span id="price">25 000 000</span>
               </div>
             </div>
           </div>
@@ -185,21 +186,13 @@
   var score = document.getElementById("score");
   var face = document.getElementById("face");
   var cards = document.getElementById("cards");
+  var price = document.getElementById("price");
   var allhouses = new Firebase("https://rentorbuy.firebaseio.com/houses");
   houses = new Array();
   allhouses.on("child_added", function(snapshot) {
     houses.push(snapshot.val());
   });
   var house = new Firebase("https://rentorbuy.firebaseio.com/houses");
-
-  /*
-  house.child("2").set({
-  "url": "http://m.finn.no/realestate/homes/ad.html?finnkode=69770141",
-  "img": "https://finncdn.no/dynamic/640w/2016/1/vertical-2/15/1/697/701/41_2136106910.jpg",
-  "price":24000000
-});
-*/
-
 
 var cards = document.getElementById("cards");
 
@@ -217,6 +210,7 @@ document.getElementById("no").addEventListener("click", function () {
 
 function paintHouse(house) {
   document.getElementById("card-img").src = house.img;
+  price.innerHTML = house.price;
   hide(score);
   hide(loading);
   show(cards);
@@ -245,7 +239,7 @@ function scorepoints() {
 };
 
 function paintScore() {
-  if(Math.random() > 0.9) {
+  if(Math.random() > 0.5) {
     face.innerHTML = "😊";
     scorepoints();
   } else {
