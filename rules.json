@@ -2,18 +2,26 @@
   "rules": {
     "users": {
       "$id": {
-        ".validate": "newData.hasChildren(['name', 'email', 'url', 'img', 'price'])",
         "name": {
           ".validate": "newData.isString()"
         },
         "email": {
           ".validate": "newData.isString()"
         },
+        "score": {
+          ".validate": "newData.isNumber()"
+        },
         "$other": {
           ".validate": "false"
         },
         ".read": "auth != null && auth.uid == $id",
-        ".write": "auth != null && auth.uid == $id",
+        ".write": "auth != null && auth.uid == $id"
+      },
+      ".read": "true"
+    },
+    "houses": {
+      "$id": {
+        ".validate": "newData.hasChildren(['url', 'img', 'price'])",
         "url": {
           ".validate": "newData.isString()"
         },
@@ -22,11 +30,13 @@
         },
         "price": {
           ".validate": "newData.isNumber()"
-        }
+        },
+        "$other": {
+          ".validate": "false"
+        },
+        ".read": "true",
+        ".write": "true"
       },
-      ".read": "true"
-    },
-    "houses": {
       ".read": "true",
       ".write": "true"
     }

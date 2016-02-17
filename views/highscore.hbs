@@ -1,0 +1,26 @@
+<table class="pure-table pure-table-horizontal">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+    <tbody id="table">
+    </tbody>
+  </table>
+
+<script>
+var table = document.getElementById("table");
+var ref = new Firebase("https://rentorbuy.firebaseio.com/users");
+
+ref.orderByChild("score").on("child_added", function(snapshot) {
+  addPerson(snapshot.val());
+});
+
+function addPerson(person) {
+  var row = "<tr><td>" + person.name +
+  "</td><td>" + person.score + "</td></tr>";
+  table.innerHTML = row + table.innerHTML;
+}
+
+</script>

@@ -1,6 +1,7 @@
 type User {
   name: String,
   email:  String,
+  score: Number
 }
 
 type House {
@@ -14,7 +15,7 @@ path /users/{id} is User {
   write() { isCurrentUser(id) }
 }
 
-path /users/{id} is House {
+path /houses/{id} is House {
   read() { true }
   write() { true }
 }

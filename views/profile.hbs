@@ -1,0 +1,32 @@
+<form id="user" class="pure-form pure-form-stacked" role="form">
+  <fieldset>
+    <h2>Profile</h2>
+
+    <label for="username">Name</label>
+    <input id="username" type="text" placeholder="Name">
+
+    <button type="submit" class="pure-button pure-button-primary">Update profile</button>
+  </fieldset>
+</form>
+<script>
+var profile = document.getElementById("profile");
+
+// Edit user
+
+document.getElementById("user").addEventListener("submit", function (e) {
+  e.preventDefault();
+  var ref = new Firebase("https://rentorbuy.firebaseio.com");
+  var authData = ref.getAuth();
+  var usersRef = ref.child("users/" + authData.uid)
+  usersRef.update({
+    "name": document.getElementById("username").value,
+    "email": authData.password.email,
+  }, function(error) {
+    if (error) {
+      alert("Data could not be saved." + error);
+    } else {
+      alert("Data saved successfully.");
+    }
+  });
+});
+</script>
