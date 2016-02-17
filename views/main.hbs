@@ -160,20 +160,22 @@
               </div>
             </div>
           </div>
-          <button id="no" class="no buttonfancy">X</button>
-          <button id="yes" class="yes buttonfancy">✔</button>
+          <div id="no" class="no buttonfancy">X</div>
+            <div id="yes" class="yes buttonfancy">✔</div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+        </div>
+        </div>
 
-    <div id="score" class="hidden mid">
-      <div class="mid">
-        <div id="face" style="font-size: 60px;"></div>
-      </div>
-    </div>
-    {{{body}}}
-  </main>
-  <footer></footer>
+        <div id="score" class="hidden mid">
+          <div class="mid">
+            <div id="face" style="font-size: 60px;"></div>
+          </div>
+        </div>
+        {{{body}}}
+      </main>
+      <footer></footer>
   <script>
   var register = document.getElementById("register");
   var loginbutton = document.getElementById("loginbutton");
@@ -225,7 +227,6 @@ function scorepoints() {
     if (authData) {
       var pathname = window.location.pathname;
       if(pathname.indexOf("h") == -1 && pathname.indexOf("p") == -1){
-        loggedIn();
         var usersRef = ref.child("users/" + authData.uid + "/score")
         usersRef.transaction(function (current_value) {
           return (current_value || 0) + 1;
@@ -283,12 +284,12 @@ function loggedIn(profileData) {
 }
 
 function loggedOut() {
-  if(register) {
+  if(register){
     show(register);
-    if(user){
-      hide(user);
-    }
-  }
+  };
+  if(user){
+    hide(user);
+  };
   show(loginbutton);
   hide(logoutbutton);
   hide(loading);
@@ -307,7 +308,7 @@ ref.onAuth(function(authData) {
   if (authData) {
     console.log("Authenticated successfully with payload:", authData);
     var pathname = window.location.pathname;
-    if(pathname.indexOf("h") == -1 && pathname.indexOf("p") == -1){
+    if(pathname.indexOf("h") == -1 && pathname.indexOf("l") == -1 && pathname.indexOf("p") == -1){
       loggedIn();
     }
   } else {
@@ -391,9 +392,8 @@ function setMessageType(message, type) {
 }
 
 // Registration
-var registration = document.getElementById("register");
-if(registration) {
-  registration.addEventListener("submit", function (e) {
+if(register) {
+  register.addEventListener("submit", function (e) {
     e.preventDefault();
     var user = {
       name:  document.getElementById("name").value.trim(),
