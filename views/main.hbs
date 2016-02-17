@@ -133,9 +133,9 @@
 </head>
 <body>
   <header class="pure-menu pure-menu-horizontal">
-    <a href="/" class="pure-menu-heading">Rent or buy</a>
-    <a href="/highscore" class="pure-menu-heading">Highscore</a>
-    <a href="/profile" class="pure-menu-heading">Profile</a>
+    <a href="/" class="pure-menu-heading">🏠</a>
+    <a href="/highscore" class="pure-menu-heading">Scores</a>
+    <a href="/profile" class="pure-menu-heading hidden">Profile</a>
     <a id="loginbutton" href="/login">Log in</a>
     <a id="logoutbutton">Log out</a>
   </header>
@@ -183,6 +183,7 @@
   var logoutbutton = document.getElementById("logoutbutton");
   var user = document.getElementById("user");
   var loading = document.getElementById("loading");
+  var profile = document.getElementById("profile");
   var score = document.getElementById("score");
   var face = document.getElementById("face");
   var cards = document.getElementById("cards");
@@ -267,6 +268,7 @@ function loggedIn(profileData) {
   hide(loginbutton);
   show(logoutbutton);
   show(loading);
+  show(profile);
   setTimeout(function(){
     if(houses.length > 0) {
       paintHouse(houses.pop());
@@ -287,6 +289,7 @@ function loggedOut() {
   show(loginbutton);
   hide(logoutbutton);
   hide(loading);
+  hide(profile);
   hide(cards);
 }
 function show(el) {
