@@ -6,6 +6,7 @@
   <title>Rent or buy</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
   <script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
   <style>
   header {
     background-color: #0078e7;
@@ -72,7 +73,8 @@
     if(register) { hide(register); show(user); }
     hide(loginbutton);
     show(logoutbutton);
-    show(profile);
+    //show(profile);
+    hide(profile);
   }
 
   function loggedOut() {
@@ -95,7 +97,7 @@
     if (authData) {
       console.log("Authenticated successfully with payload:", authData);
       loggedIn();
-      profile.innerHTML = "Hello, " + authData.password.email + "!";
+      //profile.innerHTML = "Hello, " + authData.password.email + "!";
     } else {
       console.log("Not authenticated");
       loggedOut();

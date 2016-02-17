@@ -1,0 +1,166 @@
+<div id="loading">
+  <div class="photo">
+    <img src="http://revistaneon.net/wp-content/uploads/2016/02/Luxury-Home-150x150.jpg" alt="House" />
+  </div>
+  <div class="pulse"> </div>
+</div>
+
+<!--
+<td-cards>
+  <td-card class="card-0">
+    <div class="image">
+      <div class="yes-text">LIKE</div>
+      <img src="https://finncdn.no/dynamic/1600w/2016/2/vertical-2/17/7/693/605/27_2138953778.jpg">
+      <div class="no-text">NOPE</div>
+    </div>
+  </td-card>
+</td-cards>
+👍👎
+-->
+
+<style>
+
+/* Pulse style */
+
+.photo{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translateX(-50%) translateY(-50%);
+  border-radius:1000px;
+  width:150px;
+  height:150px;
+  padding:5px;
+  border:2px solid #efefef;
+  background:#fdfdfd;
+}
+
+.photo img{
+  border-radius: 1000px;
+}
+
+.pulse{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:500px;
+  height:500px;
+  background:radial-gradient(white 25%, blue);
+  z-index:-1;
+  transform:translateY(-50%) translateX(-50%);
+  border-radius:1000px;
+  opacity:0.3;
+  border:2px solid blue;
+}
+
+// Cards style
+td-cards {
+  display: block;
+}
+
+td-card {
+  position: absolute;
+  left: 50%;
+  margin-top: 80px;
+  margin-bottom: 40px;
+  margin-left: -125px;
+  width: 250px;
+  height: 200px;
+
+  border: 1px solid #999;
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+  border-radius: 6px;
+}
+
+td-card.card-0 {
+  -webkit-transform: translate3d(0, 0px, 0);
+  transform: translate3d(0, 0px, 0);
+  top: 0px;
+  z-index: 10;
+}
+td-card.card-1 {
+  -webkit-transform: translate3d(0, 4px, 0);
+  transform: translate3d(0, 4px, 0);
+  z-index: 9;
+}
+td-card.card-2 {
+  -webkit-transform: translate3d(0, 8px, 0);
+  transform: translate3d(0, 8px, 0);
+  z-index: 8;
+}
+
+
+td-card .image {
+  position: relative;
+}
+
+td-card img {
+  max-width: 100%;
+  border-radius: 6px;
+}
+
+.yes-text {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 30px;
+  color: rgb(111, 250, 111);
+  opacity: 0;
+}
+.no-text {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  color: rgb(255, 115, 115);
+  opacity: 0;
+}
+
+.fade {
+  -webkit-transition: 0.2s opacity linear;
+  transition: 0.2s opacity linear;
+  opacity: 0;
+}
+</style>
+
+<script>
+
+var size = 140;
+setInterval(function(){
+  $('.pulse').width(size).height(size);
+  size++;
+  if(size > 200){
+    $('.pulse').css('opacity', $('.pulse').css('opacity')-0.001);
+  }
+  if(size > 500){
+    size = 50;
+	$('.pulse').width(size).height(size);
+    $('.pulse').css('opacity', '0.3');
+  }
+},0);
+
+$('.photo').click(function(){
+  console.log('CLick');
+  $( ".pulse" ).clone().appendTo( "body" );
+})
+/* pulse
+var sizepx = '0px';
+var size = 140;
+var pulse = document.getElementById("pulse")
+setInterval(function(){
+  sizepx = size + 'px'
+  pulse.setAttribute("style","width:"+sizepx);
+  pulse.setAttribute("style","height:"+sizepx);
+  size++;
+  if(size > 200){
+    pulse.style.opacity = pulse.style.opacity-0.001;
+  }
+  if(size > 500){
+    size = 50;
+    pulse.setAttribute("style","width:"+sizepx);
+    pulse.setAttribute("style","height:"+sizepx);
+    pulse.style.opacity = 0.3;
+  }
+},0);
+*/
+</script>

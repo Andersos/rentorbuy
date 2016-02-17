@@ -1,8 +1,8 @@
 {
   "rules": {
     "users": {
-      "$uid": {
-        ".validate": "newData.hasChildren(['name', 'email'])",
+      "$id": {
+        ".validate": "newData.hasChildren(['name', 'email', 'url', 'img', 'price'])",
         "name": {
           ".validate": "newData.isString()"
         },
@@ -12,10 +12,23 @@
         "$other": {
           ".validate": "false"
         },
-        ".read": "auth != null && auth.uid == $uid",
-        ".write": "auth != null && auth.uid == $uid"
+        ".read": "auth != null && auth.uid == $id",
+        ".write": "auth != null && auth.uid == $id",
+        "url": {
+          ".validate": "newData.isString()"
+        },
+        "img": {
+          ".validate": "newData.isString()"
+        },
+        "price": {
+          ".validate": "newData.isNumber()"
+        }
       },
       ".read": "true"
+    },
+    "houses": {
+      ".read": "true",
+      ".write": "true"
     }
   }
 }

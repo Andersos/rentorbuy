@@ -1,4 +1,231 @@
+<!-- House -->
+<div id="loading">
+  <div class="photo">
+    <img src="http://imgur.com/l0c9fV8.png" alt="House" />
+  </div>
+  <div class="pulse"> </div>
+</div>
+
+<div id="cards" class="hidden">
+  <div class="cards">
+    <div class="mid">
+      <div class="card">
+        <div class="image">
+          <img id="card-img" width="320">
+          <div>
+            <i>📍</i><span>Oslo</span>
+            <i>💵</i><span>25 000 000</span>
+          </div>
+        </div>
+      </div>
+      <button id="no" class="no">X</button>
+      <button id="yes" class="yes">✔</button>
+    </div>
+  </div>
+</div>
+
+<div id="score" class="hidden mid">
+  <div class="mid">
+    <div id="face" style="font-size: 60px;"></div>
+  </div>
+</div>
+
+<style>
+.left {
+  float: left;
+}
+
+i {
+  font-style: normal;
+}
+/* Pulse style */
+
+.photo{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translateX(-50%) translateY(-50%);
+  border-radius:1000px;
+  width:150px;
+  height:150px;
+  padding:5px;
+  border:2px solid #efefef;
+  background:#fdfdfd;
+}
+
+.photo img{
+  border-radius: 1000px;
+}
+
+.pulse{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:500px;
+  height:500px;
+  background:radial-gradient(white 25%, blue);
+  z-index:-1;
+  transform:translateY(-50%) translateX(-50%);
+  border-radius:1000px;
+  opacity:0.3;
+  border:2px solid blue;
+}
+/* Buttons*/
+
+.mid {
+  text-align: center;
+}
+
+.no {
+  background: #c00;
+}
+
+.yes {
+  background: #0c0;
+}
+
+button {
+  border: none;
+  color: #fff;
+  border-radius: 50% 50%;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  margin: 0 .5em;
+  display: inline-block;
+}
+
+// Cardsstyle
+
+#card-img {
+  border:2px solid #efefef;
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+  border-radius: 6px;
+}
+
+
+td-card .image {
+  position: relative;
+}
+
+td-card img {
+  max-width: 100%;
+  border-radius: 6px;
+}
+</style>
+
+<script>
+var house = new Firebase("https://rentorbuy.firebaseio.com/houses");
+/*
+house.child("2").set({
+  "url": "http://m.finn.no/realestate/homes/ad.html?finnkode=69770141",
+  "img": "https://finncdn.no/dynamic/640w/2016/1/vertical-2/15/1/697/701/41_2136106910.jpg",
+  "price":24000000
+});
+*/
+
+
+var loading = document.getElementById("loading");
+var cards = document.getElementById("cards");
+var ref = new Firebase("https://rentorbuy.firebaseio.com/houses");
+var houses = new Array();
+//setTimeout(function(){
+  //hide(loading);
+  ref.on("child_added", function(snapshot) {
+    houses.push(snapshot.val());
+  });
+
+//}, 2000);
+document.getElementById("yes").addEventListener("click", function () {
+  console.log("yes");
+  hide(cards);
+  paintScore();
+});
+document.getElementById("no").addEventListener("click", function () {
+  console.log("no");
+  hide(cards);
+  paintScore();
+});
+
+setTimeout(function(){
+  hide(loading);
+  paintHouse(houses.pop());
+}, 2000);
+
+function paintHouse(house) {
+  document.getElementById("card-img").src = house.img;
+  hide(score);
+  show(cards);
+}
+var score = document.getElementById("score");
+var face = document.getElementById("face");
+
+function paintScore() {
+  if(Math.random() > 0.5) {
+    face.innerHTML = "😊";
+  } else {
+    face.innerHTML = "😞";
+  }
+  show(score);
+
+  setTimeout(function(){
+    if(houses.length > 0) {
+      paintHouse(houses.pop());
+    } else {
+      hide(score);
+      show(loading);
+    }
+  }, 3000);
+}
+
+function hide(el) {
+  el.classList.add("hidden");
+}
+function show(el) {
+  el.classList.remove("hidden");
+}
+
+// Pulse stuff
+var size = 140;
+setInterval(function(){
+  $('.pulse').width(size).height(size);
+  size++;
+  if(size > 200){
+    $('.pulse').css('opacity', $('.pulse').css('opacity')-0.001);
+  }
+  if(size > 500){
+    size = 50;
+	$('.pulse').width(size).height(size);
+    $('.pulse').css('opacity', '0.3');
+  }
+},0);
+
+
+/* pulse
+var sizepx = '0px';
+var size = 140;
+var pulse = document.getElementById("pulse")
+setInterval(function(){
+  sizepx = size + 'px'
+  pulse.setAttribute("style","width:"+sizepx);
+  pulse.setAttribute("style","height:"+sizepx);
+  size++;
+  if(size > 200){
+    pulse.style.opacity = pulse.style.opacity-0.001;
+  }
+  if(size > 500){
+    size = 50;
+    pulse.setAttribute("style","width:"+sizepx);
+    pulse.setAttribute("style","height:"+sizepx);
+    pulse.style.opacity = 0.3;
+  }
+},0);
+*/
+</script>
+
+
 <!-- REGISTER -->
+<!-- hide registraiton
 <form id="register" class="pure-form pure-form-stacked" role="form">
   <fieldset>
     <h2>Register a new user</h2>
@@ -26,8 +253,10 @@
     <button type="submit" class="pure-button pure-button-primary">Update profile</button>
   </fieldset>
 </form>
+-->
 <script>
 // Edit user
+/*
 document.getElementById("user").addEventListener("submit", function (e) {
   e.preventDefault();
   var ref = new Firebase("https://rentorbuy.firebaseio.com");
@@ -44,7 +273,8 @@ document.getElementById("user").addEventListener("submit", function (e) {
     }
   });
 });
-
+*/
+/*
 // Registration
 document.getElementById("register").addEventListener("submit", function (e) {
   e.preventDefault();
@@ -55,5 +285,6 @@ document.getElementById("register").addEventListener("submit", function (e) {
   };
   handleAuthResponse(createUserAndLogin(user));
 });
+*/
 </script>
 <!-- / REGISTER -->

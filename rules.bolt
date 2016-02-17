@@ -3,13 +3,29 @@ type User {
   email:  String,
 }
 
-path /users/{uid} is User {
-  read() { isCurrentUser(uid) }
-  write() { isCurrentUser(uid) }
+type House {
+  url: String,
+  img:  String,
+  price: Number
+}
+
+path /users/{id} is User {
+  read() { isCurrentUser(id) }
+  write() { isCurrentUser(id) }
+}
+
+path /users/{id} is House {
+  read() { true }
+  write() { true }
 }
 
 path /users {
   read() { true }
 }
 
-isCurrentUser(uid) { auth != null && auth.uid == uid }
+path /houses {
+  read() { true }
+  write() { true }
+}
+
+isCurrentUser(id) { auth != null && auth.uid == id }
